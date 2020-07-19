@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace estagio_brg.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/colaborador")]
     [ApiController]
     public class ColaboradorController : ControllerBase
     {
@@ -24,9 +24,9 @@ namespace estagio_brg.API.Controllers
             _mapper = mapper;
         }
 
-        // GET: api/Colaborador
+        // GET: api/colaborador
         /// <summary>
-        /// Get
+        /// Método responsável para retornar todos os Colaboradores.
         /// </summary>
         /// <returns></returns>
         [HttpGet]
@@ -36,7 +36,12 @@ namespace estagio_brg.API.Controllers
             return Ok(_mapper.Map<IEnumerable<ColaboradorDto>>(colaboradores));
         }
 
-        // GET: api/Colaborador/5
+        // GET: api/colaborador/5
+        /// <summary>
+        /// Método responsável para retornar um único Colaborador.
+        /// </summary>
+        /// <param name="id">Id do Coloborador.</param>
+        /// <returns></returns>
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
@@ -48,7 +53,12 @@ namespace estagio_brg.API.Controllers
             return Ok(colaboradorDto);
         }
 
-         // GET: api/Colaborador/habilidade/4
+         // GET: api/colaborador/habilidade/4
+         /// <summary>
+         /// Método responsavel para retornar todos os colaboradores que possuem a Habilidade informada. 
+         /// </summary>
+         /// <param name="id">Id da Habilidade.</param>
+         /// <returns></returns>
         [HttpGet("habilidade/{id}", Name = "GetByHabilidadeId")]
         public IActionResult GetByHabilidadeId(int id)
         {
@@ -57,38 +67,58 @@ namespace estagio_brg.API.Controllers
            
         }
 
-        // POST: api/Colaborador
+        // POST: api/colaborador
+        /// <summary>
+        /// Método responsável por adicionar um novo Colaborador.
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost]
-        public IActionResult Post(ColaboradorDto model)
+        public IActionResult Post(ColaboradorCreateDto model)
         {
+            if (!ModelState.IsValid)  return BadRequest(ModelState);
+
             var colaborador = _mapper.Map<Colaborador>(model);
 
             _repository.Add(colaborador);
             if (_repository.SaveChanges())
             {
-                return Created($"/api/colaborador/{model.Id}", _mapper.Map<ColaboradorDto>(colaborador));
+                return Created($"/api/colaborador/{colaborador.Id}", _mapper.Map<ColaboradorDto>(colaborador));
             }
             return BadRequest("Colaborador não cadastrado");
         }
 
-        // PUT: api/Colaborador/5
+        // PUT: api/colaborador/5
+        /// <summary>
+        /// Método responsável por atualizar um Colaborador.
+        /// </summary>
+        /// <param name="id">Id do Colaborador.</param>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPut("{id}")]
-        public IActionResult Put(int id, ColaboradorDto model)
+        public IActionResult Put(int id, ColaboradorCreateDto model)
         {
-            var colab = _repository.GetColaboradorById(id);
-            if (colab == null) return BadRequest("Colaborador não encontrado");
+            if (!ModelState.IsValid) return BadRequest(ModelState);
 
-            _mapper.Map(model, colab);
+            var colaborador = _repository.GetColaboradorById(id);
+            if (colaborador == null) return BadRequest("Colaborador não encontrado");
 
-            _repository.Update(colab);
+            _mapper.Map(model, colaborador);
+
+            _repository.Update(colaborador);
             if (_repository.SaveChanges()) 
             {
-                return Created($"/api/colaborador/{model.Id}", _mapper.Map<ColaboradorDto>(colab));
+                return Created($"/api/colaborador/{colaborador.Id}", _mapper.Map<ColaboradorDto>(colaborador));
             }
             return BadRequest("Colaborador não atualizado");
         }
 
-        // DELETE: api/Colaborador/5
+        // DELETE: api/colaborador/5
+        /// <summary>
+        /// Método responsável para Remover Colaborador.
+        /// </summary>
+        /// <param name="id">Id do Colaborador</param>
+        /// <returns></returns>
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {

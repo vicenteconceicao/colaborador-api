@@ -1,17 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using AutoMapper;
 using estagio_brg.API.Data;
 using estagio_brg.API.Dtos;
+using estagio_brg.API.Dtos.Trilha;
 using estagio_brg.API.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace estagio_brg.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/trilha")]
     [ApiController]
     public class TrilhaController : ControllerBase
     {
@@ -24,7 +26,11 @@ namespace estagio_brg.API.Controllers
             _mapper = mapper;
         }
 
-        // GET: api/Trilha
+        // GET: api/trilha
+        /// <summary>
+        /// Método responsável para retornar todas as Trilhas.
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult Get()
         {
@@ -32,7 +38,12 @@ namespace estagio_brg.API.Controllers
             return Ok(_mapper.Map<IEnumerable<TrilhaDto>>(trilhas));
         }
 
-        // GET: api/Trilha/5
+        // GET: api/trilha/5
+        /// <summary>
+        ///  Método responsável para retornar uma única Trilha.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
@@ -43,7 +54,12 @@ namespace estagio_brg.API.Controllers
             return Ok(trilhaDto);
         }
 
-        // GET: api/Trilha/colaborador/4
+        // GET: api/trilha/colaborador/4
+        /// <summary>
+        /// Método responsavel para retornar todas as Trilhas que possuem o Colaborador informado.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet("colaborador/{id}")]
         public IActionResult GetByColaboradorId(int id)
         {
@@ -52,7 +68,12 @@ namespace estagio_brg.API.Controllers
 
         }
 
-        // GET: api/Trilha/habilidade/4
+        // GET: api/trilha/habilidade/4
+        /// <summary>
+        /// Método responsavel para retornar todas as Trilhas que possuem a Habilidade informada.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet("habilidade/{id}")]
         public IActionResult GetByHabilidadeId(int id)
         {
@@ -62,47 +83,72 @@ namespace estagio_brg.API.Controllers
         }
 
         // POST: api/Trilha
+        /// <summary>
+        /// Método responsável por adicionar uma nova Trilha.
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost]
-        public IActionResult Post(TrilhaDto model)
+        public IActionResult Post(TrilhaCreateDto model)
         {
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+
             var trilha = _mapper.Map<Trilha>(model);
 
             _repository.Add(trilha);
             if (_repository.SaveChanges())
             {
-                return Created($"/api/trilha/{model.Id}", _mapper.Map<TrilhaDto>(trilha));
+                return Created($"/api/trilha/{trilha.Id}", _mapper.Map<TrilhaDto>(trilha));
             }
             return BadRequest("Trilha não cadastrada");
         }
 
-        // PUT: api/Trilha/5
+        // PUT: api/trilha/5
+        /// <summary>
+        /// Método responsável por atualizar uma Trilha.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPut("{id}")]
-        public IActionResult Put(int id, TrilhaDto model)
+        public IActionResult Put(int id, TrilhaCreateDto model)
         {
-            var trilha = _repository.GetTrilhaById(id);
-            if (trilha == null) return BadRequest("Trilha não encontrada");
-
-            _mapper.Map(model, trilha);
-
-            _repository.Update(trilha);
-            if (_repository.SaveChanges())
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+            try
             {
-                return Created($"/api/trilha/{model.Id}", _mapper.Map<TrilhaDto>(trilha));
+                var trilha = _repository.GetTrilhaById(id);
+                if (trilha == null) return BadRequest("Trilha não encontrada");
+                _mapper.Map(model, trilha);
+                var result = _repository.UpdateTrilha(trilha);
+                return Ok(result);
             }
-            return BadRequest("Trilha não atualizada");
+            catch(ArgumentException e)
+            {
+                return StatusCode((int)HttpStatusCode.InternalServerError, e.Message);
+            }
         }
 
         // DELETE: api/Trilha/5
+        /// <summary>
+        /// Método responsável para Remover Trilha.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
             var trilha = _repository.GetTrilhaById(id);
             if (trilha == null) return BadRequest("Trilha não encontrada");
 
-            _repository.Remove(trilha);
-            if (_repository.SaveChanges()) return Ok("Trilha removida");
-
-            return BadRequest("Trilha não removida");
+            try
+            {
+                _repository.DeleteTrilha(trilha);
+                return Ok("Trilha foi removida");
+            }
+            catch (ArgumentException e)
+            {
+                return StatusCode((int)HttpStatusCode.InternalServerError, e.Message);
+            }
         }
     }
 }

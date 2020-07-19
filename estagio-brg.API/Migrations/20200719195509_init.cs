@@ -39,15 +39,14 @@ namespace estagio_brg.API.Migrations
                 name: "Trilhas",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
                     ColaboradorId = table.Column<int>(nullable: false),
                     HabilidadeId = table.Column<int>(nullable: false),
+                    Id = table.Column<int>(nullable: false),
                     Prazo = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Trilhas", x => x.Id);
+                    table.PrimaryKey("PK_Trilhas", x => new { x.ColaboradorId, x.HabilidadeId });
                     table.ForeignKey(
                         name: "FK_Trilhas_Colaboradores_ColaboradorId",
                         column: x => x.ColaboradorId,
@@ -184,53 +183,48 @@ namespace estagio_brg.API.Migrations
 
             migrationBuilder.InsertData(
                 table: "Trilhas",
-                columns: new[] { "Id", "ColaboradorId", "HabilidadeId", "Prazo" },
-                values: new object[] { 7, 7, 2, new DateTime(2020, 7, 24, 0, 0, 0, 0, DateTimeKind.Unspecified) });
+                columns: new[] { "ColaboradorId", "HabilidadeId", "Id", "Prazo" },
+                values: new object[] { 7, 2, 7, new DateTime(2020, 7, 24, 0, 0, 0, 0, DateTimeKind.Unspecified) });
 
             migrationBuilder.InsertData(
                 table: "Trilhas",
-                columns: new[] { "Id", "ColaboradorId", "HabilidadeId", "Prazo" },
-                values: new object[] { 4, 5, 3, new DateTime(2020, 7, 21, 0, 0, 0, 0, DateTimeKind.Unspecified) });
+                columns: new[] { "ColaboradorId", "HabilidadeId", "Id", "Prazo" },
+                values: new object[] { 5, 3, 4, new DateTime(2020, 7, 21, 0, 0, 0, 0, DateTimeKind.Unspecified) });
 
             migrationBuilder.InsertData(
                 table: "Trilhas",
-                columns: new[] { "Id", "ColaboradorId", "HabilidadeId", "Prazo" },
-                values: new object[] { 5, 5, 7, new DateTime(2020, 7, 22, 0, 0, 0, 0, DateTimeKind.Unspecified) });
+                columns: new[] { "ColaboradorId", "HabilidadeId", "Id", "Prazo" },
+                values: new object[] { 5, 7, 5, new DateTime(2020, 7, 22, 0, 0, 0, 0, DateTimeKind.Unspecified) });
 
             migrationBuilder.InsertData(
                 table: "Trilhas",
-                columns: new[] { "Id", "ColaboradorId", "HabilidadeId", "Prazo" },
-                values: new object[] { 1, 1, 8, new DateTime(2020, 7, 18, 0, 0, 0, 0, DateTimeKind.Unspecified) });
+                columns: new[] { "ColaboradorId", "HabilidadeId", "Id", "Prazo" },
+                values: new object[] { 1, 8, 1, new DateTime(2020, 7, 18, 0, 0, 0, 0, DateTimeKind.Unspecified) });
 
             migrationBuilder.InsertData(
                 table: "Trilhas",
-                columns: new[] { "Id", "ColaboradorId", "HabilidadeId", "Prazo" },
-                values: new object[] { 2, 1, 10, new DateTime(2020, 7, 19, 0, 0, 0, 0, DateTimeKind.Unspecified) });
+                columns: new[] { "ColaboradorId", "HabilidadeId", "Id", "Prazo" },
+                values: new object[] { 1, 10, 2, new DateTime(2020, 7, 19, 0, 0, 0, 0, DateTimeKind.Unspecified) });
 
             migrationBuilder.InsertData(
                 table: "Trilhas",
-                columns: new[] { "Id", "ColaboradorId", "HabilidadeId", "Prazo" },
-                values: new object[] { 6, 5, 10, new DateTime(2020, 7, 23, 0, 0, 0, 0, DateTimeKind.Unspecified) });
+                columns: new[] { "ColaboradorId", "HabilidadeId", "Id", "Prazo" },
+                values: new object[] { 5, 10, 6, new DateTime(2020, 7, 23, 0, 0, 0, 0, DateTimeKind.Unspecified) });
 
             migrationBuilder.InsertData(
                 table: "Trilhas",
-                columns: new[] { "Id", "ColaboradorId", "HabilidadeId", "Prazo" },
-                values: new object[] { 8, 7, 12, new DateTime(2020, 7, 25, 0, 0, 0, 0, DateTimeKind.Unspecified) });
+                columns: new[] { "ColaboradorId", "HabilidadeId", "Id", "Prazo" },
+                values: new object[] { 7, 12, 8, new DateTime(2020, 7, 25, 0, 0, 0, 0, DateTimeKind.Unspecified) });
 
             migrationBuilder.InsertData(
                 table: "Trilhas",
-                columns: new[] { "Id", "ColaboradorId", "HabilidadeId", "Prazo" },
-                values: new object[] { 9, 7, 15, new DateTime(2020, 7, 26, 0, 0, 0, 0, DateTimeKind.Unspecified) });
+                columns: new[] { "ColaboradorId", "HabilidadeId", "Id", "Prazo" },
+                values: new object[] { 7, 15, 9, new DateTime(2020, 7, 26, 0, 0, 0, 0, DateTimeKind.Unspecified) });
 
             migrationBuilder.InsertData(
                 table: "Trilhas",
-                columns: new[] { "Id", "ColaboradorId", "HabilidadeId", "Prazo" },
-                values: new object[] { 3, 1, 17, new DateTime(2020, 7, 20, 0, 0, 0, 0, DateTimeKind.Unspecified) });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Trilhas_ColaboradorId",
-                table: "Trilhas",
-                column: "ColaboradorId");
+                columns: new[] { "ColaboradorId", "HabilidadeId", "Id", "Prazo" },
+                values: new object[] { 1, 17, 3, new DateTime(2020, 7, 20, 0, 0, 0, 0, DateTimeKind.Unspecified) });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Trilhas_HabilidadeId",

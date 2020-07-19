@@ -16,9 +16,6 @@ namespace estagio_brg.API.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            builder.Entity<Trilha>()
-                .HasKey(t => new {t.ColaboradorId, t.HabilidadeId });
-
             builder.Entity<Colaborador>()
                 .HasData(new List<Colaborador>() { 
                     new Colaborador(1,"Açougueiro","Operacional"),

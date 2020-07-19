@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace estagio_brg.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/habilidade")]
     [ApiController]
     public class HabilidadeController : ControllerBase
     {
@@ -22,7 +22,11 @@ namespace estagio_brg.API.Controllers
             _repository = repository;
             _mapper = mapper;
         }
-        // GET: api/Habilidade
+        // GET: api/habilidade
+        /// <summary>
+        /// Método responsável para retornar todos as Habilidades.
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult Get()
         {
@@ -30,7 +34,12 @@ namespace estagio_brg.API.Controllers
             return Ok(_mapper.Map<IEnumerable<HabilidadeDto>>(habilidades));
         }
 
-        // GET: api/Habilidade/5
+        // GET: api/habilidade/5
+        /// <summary>
+        /// Método responsável para retornar uma única Habilidade.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
@@ -42,7 +51,12 @@ namespace estagio_brg.API.Controllers
             return Ok(habilidadeDto);
         }
 
-        // GET: api/Habilidade/colaborador/4
+        // GET: api/habilidade/colaborador/4
+        /// <summary>
+        /// Método responsavel para retornar todas as Habilidade de um Colaborador informado. 
+        /// </summary>
+        /// <param name="id">Id do Colaborador.</param>
+        /// <returns></returns>
         [HttpGet("colaborador/{id}", Name = "GetByColaboradorId")]
         public IActionResult GetByColaboradorId(int id)
         {
@@ -52,23 +66,38 @@ namespace estagio_brg.API.Controllers
         }
 
         // POST: api/Habilidade
+        /// <summary>
+        /// Método responsável por adicionar uma nova Habilidade.
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost]
-        public IActionResult Post(HabilidadeDto model)
+        public IActionResult Post(HabilidadeCreateDto model)
         {
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+
             var habilidade = _mapper.Map<Habilidade>(model);
 
             _repository.Add(habilidade);
             if (_repository.SaveChanges())
             {
-                return Created($"/api/habilidade/{model.Id}", _mapper.Map<HabilidadeDto>(habilidade));
+                return Created($"/api/habilidade/{habilidade.Id}", _mapper.Map<HabilidadeDto>(habilidade));
             }
             return BadRequest("Habilidade não cadastrada");
         }
 
-        // PUT: api/Habilidade/5
+        // PUT: api/habilidade/5
+        /// <summary>
+        /// Método responsável por atualizar uma Habilidade.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPut("{id}")]
-        public IActionResult Put(int id, HabilidadeDto model)
+        public IActionResult Put(int id, HabilidadeCreateDto model)
         {
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+
             var habilidade = _repository.GetHabilidadeById(id);
             if (habilidade == null) return BadRequest("Habilidade não encontrada");
 
@@ -77,12 +106,17 @@ namespace estagio_brg.API.Controllers
             _repository.Update(habilidade);
             if (_repository.SaveChanges())
             {
-                return Created($"/api/habilidade/{model.Id}", _mapper.Map<HabilidadeDto>(habilidade));
+                return Created($"/api/habilidade/{habilidade.Id}", _mapper.Map<HabilidadeDto>(habilidade));
             }
             return BadRequest("Habilidade não atualizada");
         }
 
-        // DELETE: api/Habilidade/5
+        // DELETE: api/habilidade/5
+        /// <summary>
+        /// Método responsável para Remover Habilidade.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {

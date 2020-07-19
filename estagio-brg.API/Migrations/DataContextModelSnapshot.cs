@@ -200,22 +200,19 @@ namespace estagio_brg.API.Migrations
 
             modelBuilder.Entity("estagio_brg.API.Models.Trilha", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
                     b.Property<int>("ColaboradorId")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("HabilidadeId")
                         .HasColumnType("INTEGER");
 
+                    b.Property<int>("Id")
+                        .HasColumnType("INTEGER");
+
                     b.Property<DateTime>("Prazo")
                         .HasColumnType("TEXT");
 
-                    b.HasKey("Id");
-
-                    b.HasIndex("ColaboradorId");
+                    b.HasKey("ColaboradorId", "HabilidadeId");
 
                     b.HasIndex("HabilidadeId");
 
@@ -224,65 +221,65 @@ namespace estagio_brg.API.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 1,
                             ColaboradorId = 1,
                             HabilidadeId = 8,
+                            Id = 1,
                             Prazo = new DateTime(2020, 7, 18, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            Id = 2,
                             ColaboradorId = 1,
                             HabilidadeId = 10,
+                            Id = 2,
                             Prazo = new DateTime(2020, 7, 19, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            Id = 3,
                             ColaboradorId = 1,
                             HabilidadeId = 17,
+                            Id = 3,
                             Prazo = new DateTime(2020, 7, 20, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            Id = 4,
                             ColaboradorId = 5,
                             HabilidadeId = 3,
+                            Id = 4,
                             Prazo = new DateTime(2020, 7, 21, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            Id = 5,
                             ColaboradorId = 5,
                             HabilidadeId = 7,
+                            Id = 5,
                             Prazo = new DateTime(2020, 7, 22, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            Id = 6,
                             ColaboradorId = 5,
                             HabilidadeId = 10,
+                            Id = 6,
                             Prazo = new DateTime(2020, 7, 23, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            Id = 7,
                             ColaboradorId = 7,
                             HabilidadeId = 2,
+                            Id = 7,
                             Prazo = new DateTime(2020, 7, 24, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            Id = 8,
                             ColaboradorId = 7,
                             HabilidadeId = 12,
+                            Id = 8,
                             Prazo = new DateTime(2020, 7, 25, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            Id = 9,
                             ColaboradorId = 7,
                             HabilidadeId = 15,
+                            Id = 9,
                             Prazo = new DateTime(2020, 7, 26, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         });
                 });
@@ -290,13 +287,13 @@ namespace estagio_brg.API.Migrations
             modelBuilder.Entity("estagio_brg.API.Models.Trilha", b =>
                 {
                     b.HasOne("estagio_brg.API.Models.Colaborador", "Colaborador")
-                        .WithMany()
+                        .WithMany("Trilhas")
                         .HasForeignKey("ColaboradorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("estagio_brg.API.Models.Habilidade", "Habilidade")
-                        .WithMany()
+                        .WithMany("Trilhas")
                         .HasForeignKey("HabilidadeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

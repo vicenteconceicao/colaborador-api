@@ -28,6 +28,8 @@ namespace estagio_brg.API.Data
         Trilha[] GetAllTrilhasByColaboradorId(int id);
         Trilha[] GetAllTrilhasByHabilidadeId(int id);
         Trilha GetTrilhaById(int id);
+        Trilha UpdateTrilha(Trilha entity);
+        void DeleteTrilha(Trilha entity);
 
     }
 }
