@@ -7,7 +7,7 @@ namespace estagio_brg.API.Models
 {
     public class Colaborador
     {
-        public Colaborador(){}
+        public Colaborador() { }
 
         public Colaborador(int id, string cargo, string departamento)
         {
