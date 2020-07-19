@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using AutoMapper;
 using estagio_brg.API.Data;
@@ -42,6 +44,11 @@ namespace estagio_brg.API
                         Title = "BRG API",
                         Version = "1.0"
                 });
+
+                var xmlCommentsFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlCommentsFullPath = Path.Combine(AppContext.BaseDirectory, xmlCommentsFile);
+
+                opt.IncludeXmlComments(xmlCommentsFullPath);
             });
 
             services.AddControllers()

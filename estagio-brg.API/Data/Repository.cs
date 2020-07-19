@@ -47,7 +47,9 @@ namespace estagio_brg.API.Data
         public Colaborador[] GetAllColaboradoresByHabilidadeId(int habilidadeId)
         {
             IQueryable<Colaborador> query = _context.Colaboradores;
-            query.Where(c => c.Trilhas.Any(t => t.HabilidadeId == habilidadeId)).Where(col => col.Trilhas.Any( tr => tr.ColaboradorId == col.Id )) ;
+            query = query.AsNoTracking()
+                         .Where(c => c.Trilhas.Any(t => t.HabilidadeId == habilidadeId));
+
             return query.ToArray();
         }
 
@@ -71,7 +73,8 @@ namespace estagio_brg.API.Data
         public Habilidade[] GetAllHabilidadesByColaboradorId(int colaboradorId)
         {
             IQueryable<Habilidade> query = _context.Habilidades;
-            query.Where(c => c.Trilhas.Any(t => t.ColaboradorId == colaboradorId));
+            query = query.AsNoTracking()
+                         .Where(c => c.Trilhas.Any(t => t.ColaboradorId == colaboradorId));
             return query.ToArray();
         }
 
@@ -96,6 +99,8 @@ namespace estagio_brg.API.Data
         {
             IQueryable<Trilha> query = _context.Trilhas;
             query = query.AsNoTracking()
+                         .Include(c => c.Colaborador)
+                         .Include(h => h.Habilidade)
                          .OrderBy(t => t.Id)
                          .Where(c => c.ColaboradorId == colaboradorId);
             return query.ToArray();
@@ -105,6 +110,8 @@ namespace estagio_brg.API.Data
         {
             IQueryable<Trilha> query = _context.Trilhas;
             query = query.AsNoTracking()
+                         .Include(c => c.Colaborador)
+                         .Include(h => h.Habilidade)
                          .OrderBy(t => t.Id)
                          .Where(c => c.HabilidadeId == habilidadeId);
             return query.ToArray();
@@ -114,6 +121,8 @@ namespace estagio_brg.API.Data
         {
             IQueryable<Trilha> query = _context.Trilhas;
             query = query.AsNoTracking()
+                         .Include(c => c.Colaborador)
+                         .Include(h => h.Habilidade)
                          .OrderBy(t => t.Id)
                          .Where(t => t.Id == trilhasId);
             return query.FirstOrDefault();

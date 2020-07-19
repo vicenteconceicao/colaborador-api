@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>estagio-brg.API</name>
+    </assembly>
+    <members>
+        <member name="M:estagio_brg.API.Controllers.ColaboradorController.Get">
+            <summary>
+            Get
+            </summary>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

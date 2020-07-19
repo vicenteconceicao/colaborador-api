@@ -25,6 +25,10 @@ namespace estagio_brg.API.Controllers
         }
 
         // GET: api/Colaborador
+        /// <summary>
+        /// Get
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult Get()
         {
@@ -49,8 +53,6 @@ namespace estagio_brg.API.Controllers
         public IActionResult GetByHabilidadeId(int id)
         {
             var colaboradores = _repository.GetAllColaboradoresByHabilidadeId(id);
-            if(colaboradores == null) return BadRequest("Colaborador não foi encontrado");
-            
             return Ok(_mapper.Map<IEnumerable<ColaboradorDto>>(colaboradores));
            
         }

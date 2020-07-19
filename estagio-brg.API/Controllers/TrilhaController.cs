@@ -43,6 +43,24 @@ namespace estagio_brg.API.Controllers
             return Ok(trilhaDto);
         }
 
+        // GET: api/Trilha/colaborador/4
+        [HttpGet("colaborador/{id}")]
+        public IActionResult GetByColaboradorId(int id)
+        {
+            var trilhas = _repository.GetAllTrilhasByColaboradorId(id);
+            return Ok(_mapper.Map<IEnumerable<TrilhaDto>>(trilhas));
+
+        }
+
+        // GET: api/Trilha/habilidade/4
+        [HttpGet("habilidade/{id}")]
+        public IActionResult GetByHabilidadeId(int id)
+        {
+            var trilhas = _repository.GetAllTrilhasByHabilidadeId(id);
+            return Ok(_mapper.Map<IEnumerable<TrilhaDto>>(trilhas));
+
+        }
+
         // POST: api/Trilha
         [HttpPost]
         public IActionResult Post(TrilhaDto model)

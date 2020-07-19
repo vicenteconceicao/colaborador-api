@@ -42,6 +42,15 @@ namespace estagio_brg.API.Controllers
             return Ok(habilidadeDto);
         }
 
+        // GET: api/Habilidade/colaborador/4
+        [HttpGet("colaborador/{id}", Name = "GetByColaboradorId")]
+        public IActionResult GetByColaboradorId(int id)
+        {
+            var habilidades = _repository.GetAllHabilidadesByColaboradorId(id);
+            return Ok(_mapper.Map<IEnumerable<HabilidadeDto>>(habilidades));
+
+        }
+
         // POST: api/Habilidade
         [HttpPost]
         public IActionResult Post(HabilidadeDto model)
