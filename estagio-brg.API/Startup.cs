@@ -35,6 +35,15 @@ namespace estagio_brg.API
 
             services.AddScoped<IRepository, Repository>();
 
+            services.AddSwaggerGen(opt => {
+                opt.SwaggerDoc(
+                    "BRFAPI", 
+                    new Microsoft.OpenApi.Models.OpenApiInfo() { 
+                        Title = "BRG API",
+                        Version = "1.0"
+                });
+            });
+
             services.AddControllers()
                     .AddNewtonsoftJson(opt => opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
         }
@@ -49,7 +58,11 @@ namespace estagio_brg.API
 
             app.UseRouting();
 
-            //app.UseAuthorization();
+            app.UseSwagger()
+                .UseSwaggerUI(opt => {
+                    opt.SwaggerEndpoint("/swagger/BRFAPI/swagger.json", "brgapi");
+                    opt.RoutePrefix = "";
+                });
 
             app.UseEndpoints(endpoints =>
             {
