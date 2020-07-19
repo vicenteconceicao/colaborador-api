@@ -127,5 +127,36 @@ namespace estagio_brg.API.Data
                          .Where(t => t.Id == trilhasId);
             return query.FirstOrDefault();
         }
+
+        public Trilha UpdateTrilha(Trilha entity)
+        {
+            IQueryable<Trilha> query = _context.Trilhas;
+            query = query.Where(c => c.Id == entity.Id);
+
+            Trilha dbEntity = query.SingleOrDefault();
+
+            if (dbEntity != null)
+            {
+                _context.Entry(dbEntity).CurrentValues.SetValues(entity);
+                _context.SaveChanges();
+            }
+
+            return entity;
+
+        }
+
+        public void DeleteTrilha(Trilha entity)
+        {
+            IQueryable<Trilha> query = _context.Trilhas;
+            query = query.Where(c => c.Id == entity.Id);
+
+            Trilha dbEntity = query.SingleOrDefault();
+
+            if (dbEntity != null)
+            {
+                _context.Remove(dbEntity);
+                _context.SaveChanges();
+            }
+        }
     }
 }

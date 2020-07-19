@@ -42,8 +42,14 @@ namespace estagio_brg.API
                     "BRFAPI", 
                     new Microsoft.OpenApi.Models.OpenApiInfo() { 
                         Title = "BRG API",
-                        Version = "1.0"
-                });
+                        Version = "1.0",
+                        Description = "WEB API para BRG",
+                        Contact = new Microsoft.OpenApi.Models.OpenApiContact { 
+                            Name = "Vicente Jr",
+                            Email = "vicente.junior@live.com",
+                            Url = new Uri("https://www.linkedin.com/in/vicente-jr-41787963/")
+                        }
+                    });
 
                 var xmlCommentsFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                 var xmlCommentsFullPath = Path.Combine(AppContext.BaseDirectory, xmlCommentsFile);

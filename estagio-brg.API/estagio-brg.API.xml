@@ -6,8 +6,135 @@
     <members>
         <member name="M:estagio_brg.API.Controllers.ColaboradorController.Get">
             <summary>
-            Get
+            Método responsável para retornar todos os Colaboradores.
             </summary>
+            <returns></returns>
+        </member>
+        <member name="M:estagio_brg.API.Controllers.ColaboradorController.GetById(System.Int32)">
+            <summary>
+            Método responsável para retornar um único Colaborador.
+            </summary>
+            <param name="id">Id do Coloborador.</param>
+            <returns></returns>
+        </member>
+        <member name="M:estagio_brg.API.Controllers.ColaboradorController.GetByHabilidadeId(System.Int32)">
+            <summary>
+            Método responsavel para retornar todos os colaboradores que possuem a Habilidade informada. 
+            </summary>
+            <param name="id">Id da Habilidade.</param>
+            <returns></returns>
+        </member>
+        <member name="M:estagio_brg.API.Controllers.ColaboradorController.Post(estagio_brg.API.Dtos.ColaboradorCreateDto)">
+            <summary>
+            Método responsável por adicionar um novo Colaborador.
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:estagio_brg.API.Controllers.ColaboradorController.Put(System.Int32,estagio_brg.API.Dtos.ColaboradorCreateDto)">
+            <summary>
+            Método responsável por atualizar um Colaborador.
+            </summary>
+            <param name="id">Id do Colaborador.</param>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:estagio_brg.API.Controllers.ColaboradorController.Delete(System.Int32)">
+            <summary>
+            Método responsável para Remover Colaborador.
+            </summary>
+            <param name="id">Id do Colaborador</param>
+            <returns></returns>
+        </member>
+        <member name="M:estagio_brg.API.Controllers.HabilidadeController.Get">
+            <summary>
+            Método responsável para retornar todos as Habilidades.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:estagio_brg.API.Controllers.HabilidadeController.GetById(System.Int32)">
+            <summary>
+            Método responsável para retornar uma única Habilidade.
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:estagio_brg.API.Controllers.HabilidadeController.GetByColaboradorId(System.Int32)">
+            <summary>
+            Método responsavel para retornar todas as Habilidade de um Colaborador informado. 
+            </summary>
+            <param name="id">Id do Colaborador.</param>
+            <returns></returns>
+        </member>
+        <member name="M:estagio_brg.API.Controllers.HabilidadeController.Post(estagio_brg.API.Dtos.HabilidadeCreateDto)">
+            <summary>
+            Método responsável por adicionar uma nova Habilidade.
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:estagio_brg.API.Controllers.HabilidadeController.Put(System.Int32,estagio_brg.API.Dtos.HabilidadeCreateDto)">
+            <summary>
+            Método responsável por atualizar uma Habilidade.
+            </summary>
+            <param name="id"></param>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:estagio_brg.API.Controllers.HabilidadeController.Delete(System.Int32)">
+            <summary>
+            Método responsável para Remover Habilidade.
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:estagio_brg.API.Controllers.TrilhaController.Get">
+            <summary>
+            Método responsável para retornar todas as Trilhas.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:estagio_brg.API.Controllers.TrilhaController.GetById(System.Int32)">
+            <summary>
+             Método responsável para retornar uma única Trilha.
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:estagio_brg.API.Controllers.TrilhaController.GetByColaboradorId(System.Int32)">
+            <summary>
+            Método responsavel para retornar todas as Trilhas que possuem o Colaborador informado.
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:estagio_brg.API.Controllers.TrilhaController.GetByHabilidadeId(System.Int32)">
+            <summary>
+            Método responsavel para retornar todas as Trilhas que possuem a Habilidade informada.
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:estagio_brg.API.Controllers.TrilhaController.Post(estagio_brg.API.Dtos.Trilha.TrilhaCreateDto)">
+            <summary>
+            Método responsável por adicionar uma nova Trilha.
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:estagio_brg.API.Controllers.TrilhaController.Put(System.Int32,estagio_brg.API.Dtos.Trilha.TrilhaCreateDto)">
+            <summary>
+            Método responsável por atualizar uma Trilha.
+            </summary>
+            <param name="id"></param>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:estagio_brg.API.Controllers.TrilhaController.Delete(System.Int32)">
+            <summary>
+            Método responsável para Remover Trilha.
+            </summary>
+            <param name="id"></param>
             <returns></returns>
         </member>
     </members>
