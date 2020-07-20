@@ -15,7 +15,7 @@ Desenvolver um banco de dados relacional em código SQL contendo as Tabelas Cola
 
 # Configurar
 
-Executar Script de Criação de banco 
+Executar Script de Criação de banco Postgresql (script.sql).
 
 Editar arquivos appsettings.json/appsettings.Development.json
 
