@@ -98,7 +98,7 @@ namespace estagio_brg.API.Controllers
             _repository.Add(trilha);
             if (_repository.SaveChanges())
             {
-                return Created($"/api/trilha/{trilha.Id}", _mapper.Map<TrilhaDto>(trilha));
+                return Created($"/api/trilha/{trilha.Id}", _mapper.Map<TrilhaReturnDto>(trilha));
             }
             return BadRequest("Trilha não cadastrada");
         }
