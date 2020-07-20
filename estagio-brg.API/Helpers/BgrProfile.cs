@@ -21,6 +21,7 @@ namespace estagio_brg.API.Helpers
 
             CreateMap<Trilha, TrilhaDto>().ReverseMap();
             CreateMap<Trilha, TrilhaCreateDto>().ReverseMap();
+            CreateMap<Trilha, TrilhaReturnDto>().ReverseMap();
         }
     }
 }

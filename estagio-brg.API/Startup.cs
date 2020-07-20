@@ -30,7 +30,9 @@ namespace estagio_brg.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<DataContext>(
-                    contex => contex.UseSqlite(Configuration.GetConnectionString("Default"))
+                   //context => contex.UseSqlite(Configuration.GetConnectionString("Default"))
+                   context => context.UseNpgsql(Configuration.GetConnectionString("PgContext"))
+
             );
 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
