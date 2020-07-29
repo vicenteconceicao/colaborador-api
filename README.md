@@ -1,4 +1,4 @@
-# estagio-brg - API
+# Cadastro Colaborador - API
 
 Projeto básico de cadastro.
 
@@ -10,7 +10,7 @@ Projeto básico de cadastro.
 **EntityFramework** <br>
 **PostgreSQL** <br>
 
-## Desafios
+## Desafio
 Desenvolver um banco de dados relacional em código SQL contendo as Tabelas Colaborador, Habilidade e projeto de back-end em C# que seja capaz de gravar, atualizar, deletar e ler dados.
 
 ## Configurar
